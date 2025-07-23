@@ -12,3 +12,9 @@ def read_distance():
     
     
 def main():
+    if connect_sensor():
+        for i in range(10):
+            dist = read_distance()
+            if dist:
+                print(f"거리: {dist}cm")
+            time.sleep(0.5)
