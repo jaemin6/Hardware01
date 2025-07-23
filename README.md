@@ -34,29 +34,72 @@
 
 
 ### 거북이 셋팅, 기본 설정(색상, 속도, 모양)
-#### def setup_turtle(): 
+#### ```def setup_turtle():
+    t = turtle.Turtle()
+    t.shape("turtle")
+    t.color("sky blue")
+    t.speed(5)
+    return t``` 
 
 
 ### 아두이노와 시리얼 포트를 통해 연결을 시도, 실패할 경우 False 반환
 
-#### def connection_sensor(port='COM7'):
+#### ```def connection_sensor(port='COM7'):
+    try:
+        ser = serial.Serial(port, 9600)
+        time.sleep(2)
+        print("연결 성공")
+        return ser
+    except Exception:
+        print("연결 실패")
+        return False```
 
 
 
 ### 아두이노에서 전송된 거리 값을 읽음
 
-#### def read_distance(ser):
+#### ```def read_distance(ser):  # 
+    if ser and ser.in_waiting > 0:
+        data = ser.readline().decode().strip()
+        try:
+            distance = float(data)
+            return distance
+        except:
+            pass
+    return None```
 
 
     
 ### 초음파 센서를 감지, 거북이 감지 값에 따라 이동, 정지, 재이동
 
-#### def move_turtle(t, ser):
+#### ```def move_turtle(t, ser):
+    dist = read_distance(ser)
+    if dist is not None:
+        print(f"거리: {dist}cm, 장애물 거리: {stopdistance}")
+        if dist > stopdistance:
+            t.forward(20)
+        else:
+            print("장애물 감지, 멈춤")
+    else:
+        print("거리 데이터 없음")
+
+    turtle.Screen().ontimer(lambda: move_turtle(t, ser), 50)```
 
 
 
 ### 메인 함수 (센서를 연결, 거북이 셋팅, 거북이 이동)
 
-#### def main():
+#### ```def main():
+    ser = connection_sensor()
+    if not ser:
+        print("연결 실패")
+        return
+
+    t = setup_turtle()
+    move_turtle(t, ser)
+    turtle.done()
+
+if __name__ == "__main__":
+    main()```
 
 
