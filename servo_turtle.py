@@ -17,11 +17,16 @@ t.color("sky blue")
 t.penup()
 t.goto(-200, 0)
 
-
-# 거북이 움직이게
+# 거북이 이동
 def move_turtle():
-    
-    
+    print("진격하라!!!!")
+    t.forward(80)
+
 # 메인 루프
 while True:
     if ser.in_waiting > 0:
+        line = ser.readline().decode().strip()
+        print(f"받은 메시지: {line}")
+        if line == "MOVE":
+            move_turtle()
+
