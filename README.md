@@ -112,4 +112,61 @@ if __name__ == "__main__":
     main()
 ```
 
+# Hardware02
 
+
+## Arduino + Python Turtle 프로젝트
+
+
+
+## 서브모터 작동에 따른 작동시 거북이 제어
+
+
+### 주요 기능
+#### 1. 버튼을 누르면 서보모터가 2회 동작
+
+#### 2. RGB LED가 다양한 색으로 깜빡임
+
+#### 3. 아두이노가 `"MOVE"` 시리얼 신호를 전송
+
+#### 4. 파이썬에서 이 신호를 받아 거북이(Turtle)가 전진
+
+
+
+## 아두이노 회로 구성
+'''
+- 서보모터: D6번 핀
+- 누름버튼: D2번 핀 (`INPUT_PULLUP`)
+- RGB LED
+  - Red: D10
+  - Green: D11
+  - Blue: D12
+    '''
+
+
+
+## 실행 순서
+
+### 1. 아두이노 보드에 코드 업로드
+
+### 2. 버튼을 누르면서보 2회 동작, RGB LED 깜빡임
+
+### 3. "MOVE" 문자열 시리얼 전송
+
+### 4. 파이썬에서 "MOVE" 수신 시, 거북이 전진
+
+
+
+## 핵심 동작 
+
+### Arduino (아두이노)
+- 버튼 누름 감지: `digitalRead(buttonPin)`
+- 서보 2회 동작:
+  - `myservo.write(0)`
+  - `myservo.write(90)`
+- RGB 색 깜빡임: `analogWrite(redPin, random(0, 256))`
+- 시리얼 전송: `Serial.println("MOVE")`
+
+### Python (파이썬)
+- 시리얼 수신: `ser.readline().decode().strip()`
+- 거북이 전진: `t.forward(50)`
