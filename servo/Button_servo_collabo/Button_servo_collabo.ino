@@ -23,8 +23,8 @@ void loop() {
   }
   lastButtonState = currentState;
 
-  // 서보 10회 동작
-  if (isRunning && count < 10) {
+  // 서보 2회 동작
+  if (isRunning && count < 2) {
     myservo.write(0);   // 0도
     delay(300);
     myservo.write(90);  // 90도
@@ -32,8 +32,8 @@ void loop() {
     count++;
   }
 
-  // 10회 끝나면 시리얼 전송 후 멈춤
-  if (isRunning && count >= 10) {
+  // 2회 끝나면 시리얼 전송 후 멈춤
+  if (isRunning && count >= 2) {
     Serial.println("MOVE");  // 시리얼 통신으로 신호 전송
     isRunning = false;
     delay(1000);  // 약간의 대기 시간
