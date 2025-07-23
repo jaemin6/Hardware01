@@ -28,10 +28,10 @@ def connection_sensor(port='COM7'):
     
     
 # 거리 데이터 읽기
-def read_distance():
+'''def read_distance():
     
     
     
     
 # 메인 함수  
-def main():
+def main():'''
