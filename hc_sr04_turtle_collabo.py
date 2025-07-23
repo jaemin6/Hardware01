@@ -48,7 +48,7 @@ def move_turtle(t, ser):
     else:
         print("거리 데이터 없음")
 
-    turtle.Screen().ontimer(lambda: move_turtle(t, ser), 500)
+    turtle.Screen().ontimer(lambda: move_turtle(t, ser), 50)
 
 def main():
     ser = connection_sensor()
