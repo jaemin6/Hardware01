@@ -134,14 +134,14 @@ if __name__ == "__main__":
 
 
 ## 아두이노 회로 구성
-'''
+```
 - 서보모터: D6번 핀
 - 누름버튼: D2번 핀 (`INPUT_PULLUP`)
 - RGB LED
   - Red: D10
   - Green: D11
   - Blue: D12
-    '''
+ ```
 
 
 
